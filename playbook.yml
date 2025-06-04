@@ -1,0 +1,25 @@
+---
+-  hosts: webservers
+   become: yes
+   tasks:
+     - dnf:
+         update_cache: yes
+     - dnf:
+         name: nginx
+         state: present
+     - service:
+         name: nginx
+         state: started
+         enabled: yes
+-  hosts: dbservers
+   become: yes
+   tasks:
+     - apt:
+         update_cache: yes
+     - apt:
+         name: mariadb-server
+         state: present
+     - service:
+         name: mariadb
+         state: started
+         enabled: yes
